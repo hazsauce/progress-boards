@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SelectionPage from "./SelectionPage";
+import ZonePage from "./ZonePage";
+import "./styles.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+    const [zone, setZone] = useState<string | null>(null);
+
+    if (zone === "Este") return <ZonePage zone="Este" count={10} goBack={() => setZone(null)} />;
+    if (zone === "Central") return <ZonePage zone="Central" count={12} goBack={() => setZone(null)} />;
+    if (zone === "Oeste") return <ZonePage zone="Oeste" count={28} goBack={() => setZone(null)} />;
+    if (zone === "Sur") return <ZonePage zone="Sur" count={25} goBack={() => setZone(null)} />;
+    if (zone === "Apts") return <ZonePage zone="Apts" count={24} goBack={() => setZone(null)} />;
+    return <SelectionPage selectZone={setZone} />;
+};
 
 export default App;
