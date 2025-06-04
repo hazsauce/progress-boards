@@ -14,13 +14,16 @@ type ZonePageProps = {
     zone: string;
     count: number;
     goBack: () => void;
+    isAdmin: boolean;
 };
 
-const ZonePage: React.FC<ZonePageProps> = ({ zone, count, goBack }) => {
+const ZonePage: React.FC<ZonePageProps> = ({ zone, count, goBack, isAdmin}) => {
+    // Now isAdmin is in scope here
     const [progress, setProgress] = useState<boolean[]>(() => loadProgress(zone, count));
     const [poppingIndexes, setPoppingIndexes] = useState<Set<number>>(new Set());
 
     const toggleButton = (index: number) => {
+        if (!isAdmin) return; // prevent toggle if not Admin
         const newProgress = [...progress];
         newProgress[index] = !newProgress[index];
         setProgress(newProgress);
@@ -48,6 +51,7 @@ const ZonePage: React.FC<ZonePageProps> = ({ zone, count, goBack }) => {
                         key={i}
                         className={`square ${active ? "active" : ""} ${poppingIndexes.has(i) ? "popping" : ""}`}
                         onClick={() => toggleButton(i)}
+                        disabled={!isAdmin}
                     >
                         {i + 1}
                     </button>

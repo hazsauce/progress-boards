@@ -21,6 +21,7 @@ h1 {
 .selection-buttons,
 .grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 20px;
     justify-content: center;
 }
@@ -30,8 +31,15 @@ h1 {
     gap: 20px;
 }
 
-.selection-buttons button,
+@media (max-width: 600px) {
+    .selection-buttons {
+        grid-template-columns: 1fr !important; /* single column */
+        max-width: 300px; /* optional: constrain max width on mobile */
+        margin: 0 auto;
+    }
+}
 
+.selection-buttons button,
 .apt-button button {
     font-family: "Poppins", sans-serif;
     font-size: 36px;
@@ -43,13 +51,15 @@ h1 {
     border: 2px solid white;
     cursor: pointer;
     width: 100%;
-    max-width: 200px;
+    max-width: 100% !important; /* buttons fill container width */
 }
 
 .apt-button {
-    display: flex;
     justify-content: center;
     margin-top: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .grid {
@@ -60,11 +70,11 @@ h1 {
     margin: 0 auto 20px;
 }
 
+/*Zone buttons*/
 .square {
     font-family: "Poppins", sans-serif;
     font-size: 60px;
     font-weight: 600;
-    font-style: normal;
     width: 100px;
     height: 100px;
     background-color: #c14c00; /* light orange */
@@ -94,6 +104,9 @@ h1 {
     margin-top: 80px;
     padding: 10px 20px;
     font-size: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 @keyframes pop {
